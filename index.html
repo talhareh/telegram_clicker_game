@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Fans Club</title>
+    <style>
+        body{
+            margin-top: 25px;
+        }
+
+        #fan {
+            margin: 50px auto;
+            display: block;
+            width: 200px; /* adjust size as needed */
+            transition: transform 0.2s ease-in-out; /* smooth animation */
+        }
+
+        .game-floor {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .name {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="name"> 
+        Welcome <span class="userName"></span> !!!
+    </div>
+    <div class="game-floor">
+        <img id="fan" src="fan.webp" alt="Fan" onclick="spinFan()">
+    </div>
+    <div class="score">
+        <h2>Score: <span id="score">0</span></h2>
+    </div>
+    
+    <script>
+        // Function to get query parameter by name
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Extract the username from the URL and display it
+        const userName = getQueryParam('userId');
+        if (userName) {
+            document.querySelector('.userName').innerText = userName;
+        }
+
+        let rotationSpeed = 0;
+        const maxSpeed = 360;
+        let score = 0;
+
+        function spinFan() {
+            rotationSpeed += 30; 
+            if (rotationSpeed > maxSpeed) {
+                rotationSpeed = 0; 
+            }
+            document.getElementById('fan').style.transform = `rotate(${rotationSpeed}deg)`;
+
+            score++;
+            document.getElementById('score').innerText = score;
+        }
+    </script>
+</body>
+</html>
